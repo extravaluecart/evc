@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <title>Home - Extra Value Cart</title>
+    <meta name="google-site-verification" content="M3Q_U40YCPPmu0G22IA4oxXOzOZhOAITVsX1TZXdFZ4" />
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Marekting Ecommerce website, marketplace">
+	<meta name="keywords" content="Ecommerce,Buy,Electronics,Men Apparel,Women Apparel,Apparel,Mobile,SmartPhone,Sell,Sale,extravalue, extravaluecart">
+    <meta name="author" content="">
+	<link rel="icon" type="image/png" href="img/favicon-32x32.png" sizes="64x64" />
+    
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/Ayucare.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+	<!--script type="text/javascript" language="javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script-->
+	<!--script type="text/javascript" language="javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script-->
+	<!--script src="js/custom.js"></script-->
+	
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+	<script src="https://cdn.auth0.com/js/auth0/9.8.1/auth0.min.js"></script>
+	<script src="js/auth0-variables.js"></script>
+	<script src="js/app.js"></script>
+  </head>
+<body>
+	<!--script> 
+		$(document).ready(function () {
+		$(function(){       
+		  $("#generalHeader").load("/header.html"); 
+		});
+		});
+	</script>
+    <div id ="generalHeader"></div-->
+
+    <!-- Modal -->
+	<!--button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button-->
+
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <!--div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Modal Header</h4>
+        </div-->
+        <div class="modal-body">
+          <p>You have not logged in on extravaluecart which may lead to loose your cashback. Please click on Proceed to Login and Shop, so we ensure you get the extra cash back. If still want to continue click on continue shopping.</p>
+        </div>
+        <div class="modal-footer">
+		  <a class="btn" href="" id="cs">Continue Shopping</a>
+          <!--a class="btn" href="/" onclick="FB.login()">Proceed to Login</a-->
+		  <a class="btn" href="/">Proceed to Login</a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  <script>
+	var query = window.location.search.substring(1);
+	var qs = parse_query_string(query);
+	//alert(qs);
+	
+	function parse_query_string(query) {
+  var vars = query.split("&&");
+  var query_string = {};
+  if(vars.length > 1)
+  {
+  for (var i = 0; i < 4; i++) {
+    var pair = vars[i].split("==");
+    //var key = decodeURIComponent(pair[0]);
+    //var value = decodeURIComponent(pair[1]);
+	var key = pair[0];
+    var value = pair[1];
+	//alert(key);
+	//alert(value);
+    // If first entry with this name
+	if(key == "rurl")
+	{
+		var redirect = value;
+	}
+	$('#myModal').modal('show');
+	document.getElementById("cs").href=redirect; 
+    if (typeof query_string[key] === "undefined") {
+      query_string[key] = decodeURIComponent(value);
+      // If second entry with this name
+    } else if (typeof query_string[key] === "string") {
+      var arr = [query_string[key], decodeURIComponent(value)];
+      query_string[key] = arr;
+      // If third or later entry with this name
+    } else {
+      query_string[key].push(decodeURIComponent(value));
+    }
+  }
+  }
+  return query_string;
+}
+  </script>
+  <!--script>
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    console.log('statusChangeCallback');
+    console.log(response);
+    // The response object is returned with a status field that lets the
+    // app know the current login status of the person.
+    // Full docs on the response object can be found in the documentation
+    // for FB.getLoginStatus().
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      //testAPI();
+	  FB.api('/me?fields=id,name,email', function(response) {
+		console.log('Successful login for: ' + response.name);
+		var saveData = $.ajax({
+		  type: 'POST',
+		  url: "/login?email="+response.email+"&name="+response.name,
+		  data: response,
+		  dataType: "text",
+		  success: function(resultData) {
+		  	//window.location = resultData.location;
+			//window.location.reload;
+			//var url= "https://extravaluecart.appspot.com"; 
+		//window.location = url; 
+		//window.location.reload;
+		 },
+		  error: function() { alert("Something went wrong") }
+		});
+		//var url= "/offer?id="+response.email; 
+		//window.location = url; 
+		//window.location.reload;
+		
+    });
+    } else {
+      // The person is not logged into your app or we are unable to tell.
+      // document.getElementById('status').innerHTML = 'Please log ' + 'into this app.';
+    }
+  }
+
+  // This function is called when someone finishes with the Login
+  // Button.  See the onlogin handler attached to it in the sample
+  // code below.
+  function checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+  }
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '2059154801062829',
+      cookie     : true,  // enable cookies to allow the server to access 
+                          // the session
+      xfbml      : true,  // parse social plugins on this page
+      version    : 'v2.8' // use graph api version 2.8
+    });
+
+    // Now that we've initialized the JavaScript SDK, we call 
+    // FB.getLoginStatus().  This function gets the state of the
+    // person visiting this page and can return one of three states to
+    // the callback you provide.  They can be:
+    //
+    // 1. Logged into your app ('connected')
+    // 2. Logged into Facebook, but not your app ('not_authorized')
+    // 3. Not logged into Facebook and can't tell if they are logged into
+    //    your app or not.
+    //
+    // These three cases are handled in the callback function.
+
+    FB.getLoginStatus(function(response) {
+      statusChangeCallback(response);
+    });
+	//FB.Event.subscribe('xfbml.render', checkLoginState);
+  };
+
+  // Load the SDK asynchronously
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  function testAPI() {
+    console.log('Welcome!  Fetching your information.... ');
+    FB.api('/me?fields=id,name,email', function(response) {
+      console.log('Successful login for: ' + response.name);      
+		
+    });
+  }
+</script-->
+
+
+	
+  	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark1 fixed-top" style="border-radius: 0px;margin-bottom: 0px;">
+      <div class="container" style="margin-left: 0;max-width: 1275px;">
+        <a class="" href="index.html"><img src="img/logo.jpg" alt="Logo" height="42" width="42"></a>&nbsp;&nbsp;&nbsp;
+		<a class="navbar-brand" href="index.html"><B>Extra Value Cart</B></a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto" style="float: right;">
+			 <li class="nav-item">
+              <a class="nav-link" target="_blank" href="https://extravaluecart.appspot.com/offer?id=Amazon">Amazon</a><!--img src="//ir-in.amazon-adsystem.com/e/ir?t=10df6-21&l=ur2&o=31" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" /-->
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" target="_blank" href="https://extravaluecart.appspot.com/offer?id=Flipkart">Flipkart</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" href="cashback.html">Extra Value</a>
+            </li>
+            <!--li class="nav-item">
+              <a class="nav-link" href="about.html">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="services.html">Services</a>
+            </li-->
+            <li class="nav-item">
+              <a class="nav-link" href="contact.html">Contact</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" id="qsLoginBtn" href="">Login</a>
+            </li>
+			<li class="nav-item">
+              <a class="nav-link" id="qsLogoutBtn" href="">Logout</a>
+            </li>
+			<!--li class="nav-item"> <!---->
+              <!--a class="nav-link fb-login-button" onlogin="checkLoginState();" scope="public_profile,email"  data-max-rows="1" data-size="small" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="true"></a>
+            </li>
+
+            <!--li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Portfolio
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownPortfolio">
+                <a class="dropdown-item" href="portfolio-1-col.html">1 Column Portfolio</a>
+                <a class="dropdown-item" href="portfolio-2-col.html">2 Column Portfolio</a>
+                <a class="dropdown-item" href="portfolio-3-col.html">3 Column Portfolio</a>
+                <a class="dropdown-item" href="portfolio-4-col.html">4 Column Portfolio</a>
+                <a class="dropdown-item" href="portfolio-item.html">Single Portfolio Item</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Blog
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                <a class="dropdown-item" href="blog-home-1.html">Blog Home 1</a>
+                <a class="dropdown-item" href="blog-home-2.html">Blog Home 2</a>
+                <a class="dropdown-item" href="blog-post.html">Blog Post</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownBlog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Other Pages
+              </a>
+              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownBlog">
+                <a class="dropdown-item" href="full-width.html">Full Width Page</a>
+                <a class="dropdown-item" href="sidebar.html">Sidebar Page</a>
+                <a class="dropdown-item" href="faq.html">FAQ</a>
+                <a class="dropdown-item" href="404.html">404</a>
+                <a class="dropdown-item" href="pricing.html">Pricing Table</a>
+              </div>
+            </li-->
+          </ul>
+        </div>
+      </div>
+    </nav>
+	<!--div id="status" style="padding-top: 5px;"></div-->
+	<div style="padding-top: 5px;background: #fd7e14;line-height: 1.5;color: #212529;">
+	<!--marquee-->
+		<div class="row" >
+		<a class="nav-link" target="_blank" href="" style="font-weight: 1000;padding-left: 20px; color:inherit;">Top Brands: </a> 
+		<a class="nav-link" target="_blank" href="https://extravaluecart.appspot.com/offer?id=Amazon" style="font-weight: 600;color:inherit;padding-left: 0px;">Amazon</a> 
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=Flipkart">Flipkart</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=Snapdeal">Snapdeal</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=Shopclues">ShopClues</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=Firstcry">Firstcry</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=TataCLiQ">Tata CLiQ</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=Biba">BIBA</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=Jockey">Jockey</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=Adidas">Adidas</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=ClearTrip">Clear Trip</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=MakemyTrip_Hotel">MakeMy Trip</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=Zoomcar">Zoomcar</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=Housejoy">Housejoy</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=Rentomojo">Rentomojo</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=BigBasket">Big Basket</a>
+		<a class="nav-link" style="font-weight: 600;color:inherit;padding-left: 0px;" target="_blank" href="https://extravaluecart.appspot.com/offer?id=McDonald">McDonald</a>
+		<a class="nav-link" style="color:inherit;" target="_blank" href="https://ad.admitad.com/g/d2482wrkee3e16643c5ec146d03cf3/">Wonderchef</a>
+		<a class="nav-link" style="color:inherit;" target="_blank" href="https://ad.admitad.com/g/447utslq4r3e16643c5e4f951c3cc3/">PharmEasy</a>
+		<!--a class="nav-link" style="color:inherit;" target="_blank" href="https://ad.admitad.com/g/ooavzrth513e16643c5e2905a099b1/?i=4">Patanjali</a-->
+	</div>
+		<!--/marquee-->
+	</div>
+	
+		
+	
+	<div style="padding-top: 5px;background: #dc3545;line-height: 1.5;color: #212529;">
+	<marquee behavior="alternate">
+		<div class="row" >
+			<a class="nav-link" target="_blank" href="https://extravaluecart.appspot.com/cashback.html" style="padding-left: 20px; color:#fff;"><B>ExtraValueCart</B> wishes you all a <B>HAPPY DIWALI!!!</B>.On this festive season <B>ExtraValueCart</B> will be giving <B>40%</B> more than what we have displayed on extra value table. This offer is valid till <b>10th Nov 18</b>.</a>
+		</div>
+	</marquee>
+	</div>
+	
+	
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+	  <li data-target="#myCarousel" data-slide-to="3"></li>
+	  <li data-target="#myCarousel" data-slide-to="4"></li>
+	  <!--li data-target="#myCarousel" data-slide-to="5"></li-->
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+        <img src="img/DF1.jpg" alt="Extra Value Cart" style="width: 1100px;height:355px;margin-left: auto;margin-right: auto;">
+      </div>
+
+      <div class="item">
+        <!--img src="img/W_S2.jpg" alt="Shopping" style="width: 1100px;height:355px;margin-left: auto;margin-right: auto;"-->
+		<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Amazon" ><img src="img/W_S2.jpg" alt="Shopping" style="width: 1100px;height:355px;margin-left: auto;margin-right: auto;"></a>
+      </div>
+    
+      <div class="item">
+        <!--img src="img/W_S3.jpg" alt="How Stuff Works" style="width: 1100px;height:355px;margin-left: auto;margin-right: auto;"-->
+		<a target="_blank" href="https://extravaluecart.appspot.com/cashback.html"><img src="img/W_S3.jpg" alt="Shopping" style="width: 1100px;height:355px;margin-left: auto;margin-right: auto;"></a>
+      </div>
+	  
+	  <div class="item">
+        <!--img src="img/W_S3.jpg" alt="How Stuff Works" style="width: 1100px;height:355px;margin-left: auto;margin-right: auto;"-->
+		<a target="_blank" href="https://extravaluecart.appspot.com/yera-bowl.html"><img src="img/W_S4.jpg" alt="Shopping" style="width: 1100px;height:355px;margin-left: auto;margin-right: auto;"></a>
+      </div>
+	  
+	  <div class="item">
+        <!--img src="img/W_S3.jpg" alt="How Stuff Works" style="width: 1100px;height:355px;margin-left: auto;margin-right: auto;"-->
+		<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Biba"><img src="img/W_S5_B.jpg" alt="Shopping" style="width: 1100px;height:355px;margin-left: auto;margin-right: auto;"></a>
+      </div>
+	  
+	   <!--div class="item">
+        <a target="_blank" href="https://extravaluecart.appspot.com/yera-bowl.html"><img src="img/W_S4.jpg" alt="How Stuff Works" style="width: 1100px;height:355px;margin-left: auto;margin-right: auto;"/></a>
+      </div-->
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  
+  <!-- Adds -->
+  <div class="row" style="padding-top: 10px;"  >
+		<div class="carousel slide" id="myCarousel2" data-ride="carousel">
+			<ol class="carousel-indicators">
+			  <li data-target="#myCarousel2" data-slide-to="0" class="active"></li>
+			  <li data-target="#myCarousel2" data-slide-to="1"></li>
+			  <li data-target="#myCarousel2" data-slide-to="2"></li>
+			</ol>
+			  <div class="carousel-inner">
+				<div class="item active">
+					<div class="col-lg-4 mb-4" style="padding-right: 0px;">
+					  <div class="card h-100">
+						<div class="">
+							<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=Add1"><img width="427" height="250" border="0" src="img/W_S1.jpg" alt="Cleartrip IN"/></a>
+						</div>
+					  </div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="col-lg-4 mb-4" style="padding-right: 0px;">
+					  <div class="card h-100">
+						<div class="">
+							<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=Add1"><img width="427" height="250" border="0" src="img/W_S2.jpg" alt="Cleartrip IN"/></a>
+						</div>
+					  </div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="col-lg-4 mb-4" style="padding-right: 0px;">
+					  <div class="card h-100">
+						<div class="">
+							<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=Add1"><img width="427" height="250" border="0" src="img/W_S3.jpg" alt="Cleartrip IN"/></a>
+						</div>
+					  </div>
+					</div>
+				</div>
+			  </div>
+		</div>
+		<div class="carousel slide" id="myCarousel3" data-ride="carousel">
+			<ol class="carousel-indicators">
+			  <li data-target="#myCarousel3" data-slide-to="0" class="active"></li>
+			  <li data-target="#myCarousel3" data-slide-to="1"></li>
+			  <li data-target="#myCarousel3" data-slide-to="2"></li>
+			</ol>
+				<div class="carousel-inner">
+					<div class="item active">
+						<div class="col-lg-4 mb-4" style="padding-right: 0px;">
+						  <div class="card h-100">
+							<div class="">
+								<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=Add1"><img width="427" height="250" border="0" src="img/W_S1.jpg" alt="Cleartrip IN"/></a>
+							</div>
+						  </div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="col-lg-4 mb-4" style="padding-right: 0px;">
+						  <div class="card h-100">
+							<div class="">
+								<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=Add1"><img width="427" height="250" border="0" src="img/W_S2.jpg" alt="Cleartrip IN"/></a>
+							</div>
+						  </div>
+						</div>
+					</div>
+					<div class="item">
+						<div class="col-lg-4 mb-4" style="padding-right: 0px;">
+						  <div class="card h-100">
+							<div class="">
+								<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=Add1"><img width="427" height="250" border="0" src="img/W_S3.jpg" alt="Cleartrip IN"/></a>
+							</div>
+						  </div>
+						</div>
+					</div>
+			  </div>
+		</div>
+		<div class="carousel slide" id="myCarousel4" data-ride="carousel">
+			<ol class="carousel-indicators">
+			  <li data-target="#myCarousel4" data-slide-to="0" class="active"></li>
+			  <li data-target="#myCarousel4" data-slide-to="1"></li>
+			  <li data-target="#myCarousel4" data-slide-to="2"></li>
+			</ol>
+			  <div class="carousel-inner">
+				<div class="item active">
+					<div class="col-lg-4 mb-4" style="padding-right: 0px;">
+					  <div class="card h-100">
+						<div class="">
+							<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=Add1"><img width="427" height="250" border="0" src="img/W_S1.jpg" alt="Cleartrip IN"/></a>
+						</div>
+					  </div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="col-lg-4 mb-4" style="padding-right: 0px;">
+					  <div class="card h-100">
+						<div class="">
+							<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=Add1"><img width="427" height="250" border="0" src="img/W_S2.jpg" alt="Cleartrip IN"/></a>
+						</div>
+					  </div>
+					</div>
+				</div>
+				<div class="item">
+					<div class="col-lg-4 mb-4" style="padding-right: 0px;">
+					  <div class="card h-100">
+						<div class="">
+							<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=Add1"><img width="427" height="250" border="0" src="img/W_S3.jpg" alt="Cleartrip IN"/></a>
+						</div>
+					  </div>
+					</div>
+				</div>
+			  </div>
+		</div>
+	</div>
+
+  <div id="myCarousel1" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+      <div class="item active">
+  
+	<div class="row" style="padding: 5px;">
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/amazon.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Amazon offers + cashback upto 3.5%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Amazon"  class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/flipkart.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Flipkart offers + cashback upto 2.5%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Flipkart" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/tatacliq.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Tata CLiQ offers + cashback upto 2.1%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=TataCLiQ" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/snapdeal.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Snapdeal offers + cashback upto 3.15%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Snapdeal" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/shopclues.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">ShopClues offers + cashback upto 2.25%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Shopclues" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		</div>
+		
+		<div class="row" style="padding: 5px;">
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/firstcry.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Firstcry offers + cashback upto 8₹</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Firstcry" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/biba.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Biba offers + cashback upto 2.9%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Biba"  class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/jockey.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Jockey offers + cashback upto 3.5%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Jockey" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/zoomcar.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Zoomcar offers + cashback upto 85₹</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Zoomcar" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/makemytrip.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">MakeMyTrip Hotels offers + cashback upto 55₹</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=MakemyTrip_Hotel" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		</div>
+	</div>
+	
+	<div class="item">
+		<div class="row" style="padding: 5px;">
+			<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+				<img class="card-img-top card-header" src="img/logo/travelguru.png" alt="Card image cap">
+				<div class="card-body">
+					<h5 class="card-title">Travel Guru offers + cashback upto 2.1%</h5>
+					<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+					<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=TravelGuru" class="btn" style="display: block;">GRAB OFFER</a>
+				</div>
+			</div>
+			<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+				<img class="card-img-top card-header" src="img/logo/cleartrip.png" alt="Card image cap">
+				<div class="card-body">
+					<h5 class="card-title">Cleartrip offers + cashback upto 100₹</h5>
+					<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+					<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=ClearTrip" class="btn" style="display: block;">GRAB OFFER</a>
+				</div>
+			</div>
+			<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+				<img class="card-img-top card-header" src="img/logo/foodpanda.png" alt="Card image cap">
+				<div class="card-body">
+					<h5 class="card-title">Foodpanda offers + cashback upto 15₹</h5>
+					<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+					<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=FoodPanda" class="btn" style="display: block;">GRAB OFFER</a>
+				</div>
+			</div>
+			<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+				<img class="card-img-top card-header" src="img/logo/bigbasket.png" alt="Card image cap">
+				<div class="card-body">
+					<h5 class="card-title">Bigbasket offers + cashback upto 1.75%</h5>
+					<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+					<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=BigBasket" class="btn" style="display: block;">GRAB OFFER</a>
+				</div>
+			</div>
+			<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+				<img class="card-img-top card-header" src="img/logo/bookmyshow.png" alt="Card image cap">
+				<div class="card-body">
+					<h5 class="card-title">Book My Show offers + cashback upto 5₹</h5>
+					<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+					<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=BookMyShow" class="btn" style="display: block;">GRAB OFFER</a>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="padding: 10px;">
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/wondershef.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Wonderchef offers + cashback upto 4.5%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Wonderchef" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/adidas.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Adidas offers + cashback upto 4.2%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Adidas" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/makemytrip.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">MakeMyTrip Domestic Flight offers + cashback upto 55₹</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=MakemyTrip_DF" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/hopscotch.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Hopscotch offers + cashback upto 1.5%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Amazon"  class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/shoppersstop.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Shoppers Stop offers + cashback upto 100₹</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Shopperstop" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+	</div>
+	</div>
+	
+	
+	<div class="item">
+	<div class="row" style="padding: 5px;">
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/bata.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Bata offers + cashback upto 2.25%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Bata"  class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/rentomojo.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Rentomojo offers + cashback upto 275₹</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Rentomojo" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/housejoy.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Housejoy offers + cashback upto 35₹</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Housejoy" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/amazon.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Amazon offers + cashback upto 3.5%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Amazon" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/paytm.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Paytm offers + cashback upto 7.75%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Paytm" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		</div>
+		
+		<div class="row" style="padding: 5px;">
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/jetairways.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Jet Airways offers + cashback upto 65₹</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Jetairways" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/koovs.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Koovs offers + cashback upto 2.3%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Koovs"  class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/guesthouser.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Guest Houser offers + cashback upto 131₹</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Guesthouser" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/McDonald.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">McDonald offers + cashback upto 8.75₹</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=McDonald" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		<div class="card container" style="width: 260px;height: 190px;float: left;padding: 0px;">
+			<img class="card-img-top card-header" src="img/logo/flipkart.png" alt="Card image cap">
+			<div class="card-body">
+				<h5 class="card-title">Flipkart offers + cashback upto 2.5%</h5>
+				<!--p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p-->
+				<a target="_blank" href="https://extravaluecart.appspot.com/offer?id=Flipkart" class="btn" style="display: block;">GRAB OFFER</a>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>
+ <!-- Left and right controls -->
+    <a class="left carousel-control1" href="#myCarousel1" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control1" href="#myCarousel1" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+      <span class="sr-only">Next</span>
+    </a>
+</div>
+			
+	<!--div class="row" style="padding-top: 10px;">
+            <div class="col-xl-2 col-lg-2 col-6" style="padding-left: 0px;padding-right: 10px;">
+              <div class="card" style="padding-left=10px;">
+                <div class="card-content" style="background: #16876e;">
+                  <div class="card-body" style="width: 155px;height: 91px;">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                      </div>
+                      <div class="media-body">
+                        <a class="" target="_blank" href="https://www.amazon.in/gp/product/B00QJDOEAO/ref=as_li_ss_tl?&ascsub&linkCode=ll1&tag=10df6-21&linkId=bc08621ab8218420d19c7b726c9b710c&language=en_IN"><h3 style="margin: 0px;color: #fff;font-size: 20px;text-align: center;">Kindle Devices & eBooks</h3></a> 
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+			<div class="col-xl-2 col-lg-2 col-6" style="padding-left: 0px;padding-right: 10px;">
+              <div class="card" style="padding-left=10px;">
+                <div class="card-content" style="background: #16876e;">
+                  <div class="card-body" style="width: 155px;height: 91px;">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                      </div>
+                      <div class="media-body">
+                        <a class="" target="_blank" href="https://www.amazon.in/Kitchen-Dining-Store/b/ref=as_li_ss_tl?ie=UTF8&node=5925789031&linkCode=ll2&tag=10df6-21&linkId=69661aeb513d158a29be20a77838a0b6&language=en_IN"><h3 style="margin: 0px;color: #fff;font-size: 20px;text-align: center;">Home and Kitchen</h3></a> 
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+			<div class="col-xl-2 col-lg-2 col-6" style="padding-left: 0px;padding-right: 10px;">
+              <div class="card" style="padding-left=10px;">
+                <div class="card-content" style="background: #16876e;">
+                  <div class="card-body" style="width: 155px;height: 91px;">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                      </div>
+                      <div class="media-body">
+                        <a class="" target="_blank" href="https://www.amazon.in/Mens-Clothing/b/ref=as_li_ss_tl?ie=UTF8&node=1968024031&linkCode=ll2&tag=10df6-21&linkId=309b85c239d312812a29b592c3f04fd9&language=en_IN"><h3 style="margin: 0px;color: #fff;font-size: 20px;text-align: center;">Apparel & Shoes</h3></a> 
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+			<div class="col-xl-2 col-lg-2 col-6" style="padding-left: 0px;padding-right: 10px;">
+              <div class="card" style="padding-left=10px;">
+                <div class="card-content" style="background: #16876e;">
+                  <div class="card-body" style="width: 155px;height: 91px;">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                      </div>
+                      <div class="media-body">
+                        <a class="" target="_blank" href="https://www.amazon.in/Toys-Games/b/ref=as_li_ss_tl?ie=UTF8&node=1350380031&linkCode=ll2&tag=10df6-21&linkId=f1c83baa6ebb4d2772c7e14929ce9279&language=en_IN"><h3 style="margin: 0px;color: #fff;font-size: 20px;text-align: center;">Toys and Baby Products</h3></a> 
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+			<div class="col-xl-2 col-lg-2 col-6" style="padding-left: 0px;padding-right: 10px;">
+              <div class="card" style="padding-left=10px;">
+                <div class="card-content" style="background: #16876e;">
+                  <div class="card-body" style="width: 155px;height: 91px;">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                      </div>
+                      <div class="media-body">
+                        <a class="" target="_blank" href="https://www.amazon.in/Men-Watches/b/ref=as_li_ss_tl?ie=UTF8&node=2563504031&linkCode=ll2&tag=10df6-21&linkId=492761d362704301c997296a7c76491f&language=en_IN"><h3 style="margin: 0px;color: #fff;font-size: 20px;text-align: center;">Watches</h3></a> 
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+			<div class="col-xl-2 col-lg-2 col-6" style="padding-left: 0px;padding-right: 10px;">
+              <div class="card" style="padding-left=10px;">
+                <div class="card-content" style="background: #16876e;">
+                  <div class="card-body" style="width: 155px;height: 91px;">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                      </div>
+                      <div class="media-body">
+                        <a class="" target="_blank" href="https://www.amazon.in/kitchen-home-appliances/b/ref=as_li_ss_tl?ie=UTF8&node=4951860031&linkCode=ll2&tag=10df6-21&linkId=691f0fbecc8f846471b9e754aee40978&language=en_IN"><h3 style="margin: 0px;color: #fff;font-size: 20px;text-align: center;">Kitchen Appliances</h3></a> 
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+			
+			<div class="col-xl-2 col-lg-2 col-6" style="padding-left: 0px;padding-right: 10px;">
+              <div class="card" style="padding-left=10px;">
+                <div class="card-content" style="background: #16876e;">
+                  <div class="card-body" style="width: 155px;height: 91px;">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                      </div>
+                      <div class="media-body">
+                        <a class="" target="_blank" href="https://www.amazon.in/b/ref=as_li_ss_tl?ie=UTF8&node=9574332031&linkCode=ll2&tag=10df6-21&linkId=c24a6b93d1f618949b731dd69be5b173&language=en_IN"><h3 style="margin: 0px;color: #fff;font-size: 20px;text-align: center;">Grocery and Gourmet</h3></a> 
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+			<div class="col-xl-2 col-lg-2 col-6" style="padding-left: 0px;padding-right: 10px;">
+              <div class="card" style="padding-left=10px;">
+                <div class="card-content" style="background: #16876e;">
+                  <div class="card-body" style="width: 155px;height: 91px;">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                      </div>
+                      <div class="media-body">
+                        <a class="" target="_blank" href="https://www.amazon.in/Luggage-Bags/b/ref=as_li_ss_tl?ie=UTF8&node=2454169031&linkCode=ll2&tag=10df6-21&linkId=f48cfea93aa898adf949e5ed9edf55fa&language=en_IN"><h3 style="margin: 0px;color: #fff;font-size: 20px;text-align: center;">Luggage and Bags</h3></a> 
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+			<div class="col-xl-2 col-lg-2 col-6" style="padding-left: 0px;padding-right: 10px;">
+              <div class="card" style="padding-left=10px;">
+                <div class="card-content" style="background: #16876e;">
+                  <div class="card-body" style="width: 155px;height: 91px;">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                      </div>
+                      <div class="media-body">
+                        <a class="" target="_blank" href="https://www.amazon.in/Sports/b/ref=as_li_ss_tl?ie=UTF8&node=1984443031&linkCode=ll2&tag=10df6-21&linkId=5122d82cd21d6c2b66779cc95cdfe0a4&language=en_IN"><h3 style="margin: 0px;color: #fff;font-size: 20px;text-align: center;">Sports, Fitness and Outdoors</h3></a> 
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+			<div class="col-xl-2 col-lg-2 col-6" style="padding-left: 0px;padding-right: 10px;">
+              <div class="card" style="padding-left=10px;">
+                <div class="card-content" style="background: #16876e;">
+                  <div class="card-body" style="width: 155px;height: 91px;">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                      </div>
+                      <div class="media-body">
+                        <a class="" target="_blank" href="https://www.amazon.in/health-and-personal-care/b/ref=as_li_ss_tl?ie=UTF8&node=1350384031&linkCode=ll2&tag=10df6-21&linkId=f535277332f4776a55426c1c61f77743&language=en_IN"><h3 style="margin: 0px;color: #fff;font-size: 20px;text-align: center;">Health & Personal Care</h3></a> 
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+			<div class="col-xl-2 col-lg-2 col-6" style="padding-left: 0px;padding-right: 10px;">
+              <div class="card" style="padding-left=10px;">
+                <div class="card-content" style="background: #16876e;">
+                  <div class="card-body" style="width: 155px;height: 91px;">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                      </div>
+                      <div class="media-body">
+                        <a class="" target="_blank" href="https://www.amazon.in/Personal-Care-Appliances/b/ref=as_li_ss_tl?ie=UTF8&node=3150028031&linkCode=ll2&tag=10df6-21&linkId=85243df7c5fff98388dc9c301eea7df7&language=en_IN"><h3 style="margin: 0px;color: #fff;font-size: 20px;text-align: center;">Personal Care Appliances</h3></a> 
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+			<div class="col-xl-2 col-lg-2 col-6" style="padding-left: 0px;padding-right: 10px;">
+              <div class="card" style="padding-left=10px;">
+                <div class="card-content" style="background: #16876e;">
+                  <div class="card-body" style="width: 155px;height: 91px;">
+                    <div class="media d-flex">
+                      <div class="align-self-center">
+                      </div>
+                      <div class="media-body">
+                        <a class="" target="_blank" href="https://www.amazon.in/Office-Stationery-Supplies/b/ref=as_li_ss_tl?ie=UTF8&node=2454172031&linkCode=ll2&tag=10df6-21&linkId=6e7c3050050c73cc370408bf8eee1959&language=en_IN"><h3 style="margin: 0px;color: #fff;font-size: 20px;text-align: center;">Office and Stationery</h3></a> 
+                        <span></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+  </div-->
+		
+	<div class="row" style="padding-top: 10px;">
+        <div class="col-lg-4 mb-4" style="padding-right: 0px;">
+          <div class="card h-100">
+            <div class="">
+              <!--a href="#" class="btn btn-primary">Shop Now</a-->
+			  <!-- admitad.banner: 3bwfxe1mu23e16643c5eed464edc45 Cleartrip [CPS] IN -->
+				<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=ClearTrip"><img width="427" height="250" border="0" src="https://ad.admitad.com/b/3bwfxe1mu23e16643c5eed464edc45/" alt="Cleartrip IN"/></a>
+				<!-- /admitad.baner -->
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mb-4" style="padding-right: 0px;">
+          <div class="card h-100">
+            <div class="">
+              <!-- admitad.banner: 2vkp4u3opp3e16643c5e9814d2cd5d MMT Hotels [CPS] IN -->
+				<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=MakemyTrip_Hotel"><img width="427" height="250" border="0" src="https://ad.admitad.com/b/2vkp4u3opp3e16643c5e9814d2cd5d/" alt="MMT Hotels IN"/></a>
+				<!-- /admitad.banner -->
+            </div>
+          </div>
+        </div>
+		<div class="col-lg-4 mb-4" style="padding-right: 0px;">
+          <div class="card h-100">
+            <div class="">
+              <!-- admitad.banner: jpc4a7ribr3e16643c5e27faeb9119 Travelguru [CPS] IN -->
+				<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=TravelGuru"><img width="427" height="250" border="0" src="https://ad.admitad.com/b/jpc4a7ribr3e16643c5e27faeb9119/" alt="Travelguru IN"/></a>
+			<!-- /admitad.banner -->
+            </div>
+          </div>
+        </div>
+		
+		<div class="col-lg-4 mb-4" style="padding-right: 0px;">
+          <div class="card h-100">
+            <div class="">
+				<!-- admitad.banner: t1vk046wx33e16643c5ea80d05f527 Flipkart [CPS] IN -->
+				<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=Flipkart"><img width="427" height="250" border="0" src="https://ad.admitad.com/b/t1vk046wx33e16643c5ea80d05f527/" alt="Flipkart IN"/></a>
+				<!-- /admitad.banner -->
+            </div>
+          </div>
+        </div>
+		
+		<div class="col-lg-4 mb-4" style="padding-right: 0px;">
+          <div class="card h-100">
+            <div class="">
+              <!-- admitad.banner: wvc1peeo1r3e16643c5e1051f25b5d Bigbasket [CPS] IN -->
+				<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=BigBasket"><img width="427" height="250" border="0" src="https://ad.admitad.com/b/wvc1peeo1r3e16643c5e1051f25b5d/" alt="Bigbasket IN"/></a>
+				<!-- /admitad.banner -->
+            </div>
+          </div>
+        </div>
+		
+		<div class="col-lg-4 mb-4" style="padding-right: 0px;">
+          <div class="card h-100">
+            <div class="">
+				<!-- admitad.banner: 3qj2uep8vk3e16643c5e3b5519b828 Zoomcar [CPS] IN -->
+				<a target="_blank" rel="nofollow" href="https://extravaluecart.appspot.com/offer?id=Zoomcar"><img width="427" height="250" border="0" src="https://ad.admitad.com/b/3qj2uep8vk3e16643c5e3b5519b828/" alt="Zoomcar IN"/></a>
+				<!-- /admitad.banner -->
+            </div>
+          </div>
+        </div>
+	  </div>
+	  
+	  <script> 
+		$(document).ready(function () {
+		$(function(){       
+		  $("#generalFooter").load("/footer.html"); 
+		});
+		});
+	</script>
+    <div id ="generalFooter"></div>
+  </body>
+</html>
